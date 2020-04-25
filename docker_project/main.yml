@@ -1,0 +1,31 @@
+---
+    - hosts: localhost
+      connection: local 
+      tasks:
+        - name: Install pip
+          apt: name=python-pip state=present
+          
+        
+      
+        - name: install docker-py
+          pip: name=docker-py
+          #pip: name=docker-compose
+      
+        - name: Build Docker image from Dockerfile
+          docker_image:
+            name: web
+            path: docker
+            state: build
+        
+        - name: Running the container
+          shell : sudo docker run -d -p 8080:8080 web             
+
+        - name: Running the container
+          docker_compose:
+            project_src: wordpress-docker
+
+
+
+
+        - name: Check if container is running
+          shell: docker ps
