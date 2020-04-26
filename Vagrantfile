@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "bento/ubuntu-18.04"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -65,19 +65,27 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    #sudo add-apt-repository ppa:ubuntu-sdk-team/ppa -y
+    sudo apt-get update
+    #sudo apt-get install -y python-pip
+    #sudo pip install docker-compose
+    sudo apt-get install -y  runc
     sudo apt-get update
     sudo apt-get install -y software-properties-common curl
-    sudo apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common sudo
-    sudo curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
+    sudo apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common sudo
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
     sudo apt-get update
-    sudo apt-get install -y docker-ce
-    sudo  curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-    docker-compose --version
-    curl -fsSL https://get.docker.com/ -o get-docker.sh
+    sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+    #sudo  curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    #chmod +x /usr/local/bin/docker-compose
+    #docker-compose --version
+    #curl -fsSL https://get.docker.com/ -o get-docker.sh
     sudo apt-add-repository ppa:ansible/ansible -y
     sudo apt-get update
     sudo apt-get install -y ansible
+    cd /home/ubuntu/Vagdockans/docker_project && sudo ansible-playbook  main.yml -vvv
+ 
   SHELL
 end

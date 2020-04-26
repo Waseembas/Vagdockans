@@ -1,5 +1,18 @@
 Steps
 
+clone the repo 
+
+get the full path where is code clone
+
+
+config.vm.synced_folder "paste the your system repo complete path here", "/home/ubuntu"
+
+
+
+
+these following lines are automated with vagrant
+
+"
 install the ansible on your system first by this link https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-16-04
 now check the connectivity using this command ansible -m ping localhost
 install the docker and dockercompose using these links
@@ -37,6 +50,15 @@ Admin user credentials:
 login: admin
 password: admin
 
+"
+
+
+
+
+
+
+
+REmaining will move in jenkin vagrant automation repo
 
 For ASSIGMENT part
 

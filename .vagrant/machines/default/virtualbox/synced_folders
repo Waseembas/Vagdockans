@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/ubuntu":{"guestpath":"/home/ubuntu","hostpath":"/home/muhammadwaseem/my-first-vagrant-project","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/muhammadwaseem/my-first-vagrant-project/Vagdockans","disabled":false,"__vagrantfile":true}}}
