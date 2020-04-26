@@ -7,6 +7,10 @@ get the full path where is code clone
 
 config.vm.synced_folder "paste the your system repo complete path here", "/home/ubuntu"
 
+vagrant up
+
+vagrant ssh
+
 
 
 
